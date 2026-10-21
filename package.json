@@ -1,0 +1,31 @@
+{
+  "name": "datacom-kudos-portal",
+  "version": "1.0.0",
+  "description": "Datacom Kudos System - Internal Employee Recognition Portal with Spec-Driven Content Moderation",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "server": "node server/index.js",
+    "client": "npm run dev --prefix client",
+    "build": "npm run build --prefix client",
+    "dev": "node server/index.js",
+    "test": "node --test server/tests/*.test.js"
+  },
+  "keywords": [
+    "datacom",
+    "kudos",
+    "employee-portal",
+    "spec-driven-development",
+    "content-moderation",
+    "express",
+    "react",
+    "sqlite"
+  ],
+  "author": "Arun Kanth (Datacom Graduate Developer)",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.6",
+    "express": "^4.22.3"
+  }
+}
