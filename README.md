@@ -86,52 +86,19 @@ This project demonstrates the **Spec-Driven Development (SDD)** methodology—tr
 ## 📋 Database Schema
 
 ```mermaid
-erDiagram
-    USERS ||--o{ KUDOS : "sends (sender_id)"
-    USERS ||--o{ KUDOS : "receives (recipient_id)"
-    USERS ||--o{ KUDOS : "moderates (moderated_by)"
-    KUDOS ||--o{ REACTIONS : "has"
-    USERS ||--o{ REACTIONS : "reacts"
-    KUDOS ||--o{ MODERATION_LOGS : "audited in"
-    USERS ||--o{ MODERATION_LOGS : "action by (admin_id)"
+flowchart TD
+    USERS["👤 USERS<br/>• id (PK)<br/>• name, email<br/>• role ('USER', 'ADMIN')<br/>• title, department<br/>• avatar_url"]
+    KUDOS["⭐ KUDOS<br/>• id (PK)<br/>• sender_id (FK)<br/>• recipient_id (FK)<br/>• message, category<br/>• is_visible (DEFAULT 1)<br/>• moderated_by (FK)<br/>• moderated_at, reason_for_moderation<br/>• deleted_at"]
+    REACTIONS["💬 REACTIONS<br/>• id (PK)<br/>• kudos_id (FK)<br/>• user_id (FK)<br/>• emoji ('👍','❤️','👏','🚀')"]
+    MOD_LOGS["🛡️ MODERATION_LOGS<br/>• id (PK)<br/>• kudos_id (FK)<br/>• admin_id (FK)<br/>• action ('HIDE','UNHIDE','DELETE')<br/>• reason, created_at"]
 
-    USERS {
-        TEXT id PK
-        TEXT name
-        TEXT email
-        TEXT role
-        TEXT title
-        TEXT department
-    }
-
-    KUDOS {
-        TEXT id PK
-        TEXT sender_id FK
-        TEXT recipient_id FK
-        TEXT message
-        TEXT category
-        BOOLEAN is_visible
-        TEXT moderated_by FK
-        DATETIME moderated_at
-        TEXT reason_for_moderation
-        DATETIME deleted_at
-    }
-
-    REACTIONS {
-        TEXT id PK
-        TEXT kudos_id FK
-        TEXT user_id FK
-        TEXT emoji
-    }
-
-    MODERATION_LOGS {
-        TEXT id PK
-        TEXT kudos_id FK
-        TEXT admin_id FK
-        TEXT action
-        TEXT reason
-        DATETIME created_at
-    }
+    USERS -->|"sends"| KUDOS
+    USERS -->|"receives"| KUDOS
+    USERS -.->|"moderates (Admin)"| KUDOS
+    KUDOS -->|"has reactions"| REACTIONS
+    USERS -->|"reacts"| REACTIONS
+    KUDOS -->|"audited in"| MOD_LOGS
+    USERS -.->|"admin action"| MOD_LOGS
 ```
 
 ---
