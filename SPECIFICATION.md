@@ -3,6 +3,7 @@
 **Author / AI Architect:** Graduate Developer (Datacom)  
 **Status:** Approved & Implemented  
 **Version:** 1.0.0  
+**Public Git Repository:** [https://github.com/ArunKanth07/datacom-kudos-portal](https://github.com/ArunKanth07/datacom-kudos-portal)  
 
 ---
 
@@ -327,3 +328,17 @@ App
 | **Design Revision** | Graduate Dev (Architect) | Schema Enhancement | Added `is_visible`, `moderated_by`, `moderated_at`, `reason_for_moderation`, and `moderation_logs` table. |
 | **Safety Revision** | Graduate Dev (Architect) | Spam & Edge Cases | Added self-kudos restriction, 500-char max, 5-min duplicate cooldown, and XSS sanitization. |
 | **Sign-Off** | Architecture Approved | Implementation Phase | Specification locked and ready for full implementation. |
+
+---
+
+## 6. Spec-Driven Development Reflection (Datacom Evaluation)
+
+### 6.1 How did the structured approach to specification change your development process compared to traditional coding?
+In traditional interactive "vibe coding", development typically starts directly from informal prompts, which frequently results in missing operational requirements, overlooked security models, and costly downstream refactoring. By adopting **Spec-Driven Development (SDD)**, the system architecture was formalized into a specification first. This forced us to identify critical omissions—such as content moderation, spam duplicate prevention, and RBAC—before writing code. The specification acted as a single source of truth, ensuring the subsequent code generation was structured, precise, and accurate on the first attempt.
+
+### 6.2 What was the most challenging part of reviewing and refining the AI-generated specification?
+The most challenging part was shifting from a passive developer mindset to that of an enterprise AI Architect. The AI's initial response only implemented the surface-level prompt (giving kudos and displaying a feed). Identifying the missing non-functional and enterprise requirements—such as inappropriate content moderation, preventing employees from giving kudos to themselves, duplicate flood protection, and requiring mandatory reasons for an immutable compliance audit trail—required critical human-in-the-loop oversight.
+
+### 6.3 How did having a complete specification before implementation affect the quality and completeness of the final code?
+Having a locked specification with defined database DDL schemas, exact API contracts, and explicit acceptance criteria eliminated ambiguity during implementation. Both the backend routes and frontend UI fit together seamlessly, data integrity was enforced at the database level with foreign keys and check constraints, and all 15 automated test cases passed on the first run without needing architectural refactoring. Spec-driven development elevated our role from reactive coders to strategic architects.
+
